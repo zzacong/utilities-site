@@ -1,9 +1,24 @@
-//  @ts-check
-
 import { tanstackConfig } from '@tanstack/eslint-config'
 
 export default [
   ...tanstackConfig,
+  // ✅ JS config files: no TS project
+  {
+    files: ['*.config.js', '*.config.cjs', '*.config.mjs'],
+    languageOptions: {
+      parserOptions: {
+        project: null,
+      },
+    },
+    rules: {
+      // Disable *all* rules that require type info
+      '@typescript-eslint/consistent-type-imports': 'off',
+      '@typescript-eslint/no-unnecessary-condition': 'off',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/require-await': 'off',
+    },
+  },
   {
     rules: {
       '@typescript-eslint/array-type': 'off',
