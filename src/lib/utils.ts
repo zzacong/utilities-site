@@ -8,9 +8,12 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function toKebabCase(input: string) {
-  return input
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
+  return (
+    input
+      .trim()
+      // .replace(/([a-z])([A-Z])/g, '$1-$2') // Get all lowercase to uppercase transitions
+      .replace(/[\s_]+/g, '-') // Replace spaces and underscores with dashes
+      .replace(/^-+|-+$/g, '') // Trim dashes from start and end
+      .toLowerCase()
+  )
 }
