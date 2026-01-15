@@ -9,7 +9,7 @@ import {
 
 export default function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 flex items-center gap-4 bg-background p-4 text-white shadow-md">
+    <header className="fixed inset-x-0 top-0 flex items-baseline gap-4 bg-background p-4 text-white shadow-md">
       <h1 className="font-mono text-lg font-semibold text-foreground">
         <Link to="/">Utilities</Link>
       </h1>
