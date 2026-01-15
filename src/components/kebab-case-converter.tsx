@@ -18,7 +18,9 @@ import {
 } from '@/components/ui/tooltip'
 import { toKebabCase } from '@/lib/utils'
 
-export function KebabCaseConverter() {
+import { Button } from './ui/button'
+
+export default function KebabCaseConverter() {
   return (
     <ExampleWrapper>
       <KebabCaseForm />
@@ -71,16 +73,22 @@ function KebabCaseForm() {
 
           {kebabString && (
             <Field orientation="horizontal" className="items-start">
-              <div className="w-full rounded-xl bg-muted px-2.5 py-1">
+              <div className="flex w-full items-center self-stretch rounded-xl bg-muted px-2.5 py-1">
                 <p className="font-mono text-sm font-medium text-foreground">
                   {kebabString}
                 </p>
               </div>
               <Tooltip>
-                <TooltipTrigger variant="outline" size="icon" onClick={onCopy}>
-                  <span className="sr-only">{copied ? 'Copied!' : 'Copy'}</span>
-                  {copied ? <Check /> : <Copy />}
-                </TooltipTrigger>
+                <TooltipTrigger
+                  render={
+                    <Button variant="outline" size="icon" onClick={onCopy}>
+                      <span className="sr-only">
+                        {copied ? 'Copied!' : 'Copy'}
+                      </span>
+                      {copied ? <Check /> : <Copy />}
+                    </Button>
+                  }
+                />
                 <TooltipContent>
                   <p>Copy</p>
                 </TooltipContent>

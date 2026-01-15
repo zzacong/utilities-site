@@ -9,8 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as KebabCaseRouteImport } from './routes/kebab-case'
 import { Route as IndexRouteImport } from './routes/index'
 
+const KebabCaseRoute = KebabCaseRouteImport.update({
+  id: '/kebab-case',
+  path: '/kebab-case',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +25,39 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kebab-case': typeof KebabCaseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kebab-case': typeof KebabCaseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kebab-case': typeof KebabCaseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/kebab-case'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/kebab-case'
+  id: '__root__' | '/' | '/kebab-case'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KebabCaseRoute: typeof KebabCaseRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/kebab-case': {
+      id: '/kebab-case'
+      path: '/kebab-case'
+      fullPath: '/kebab-case'
+      preLoaderRoute: typeof KebabCaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +70,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KebabCaseRoute: KebabCaseRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
