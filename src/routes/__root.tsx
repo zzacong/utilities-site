@@ -17,6 +17,10 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
+        name: 'description',
+        content: "Zac's web development utility toolkit",
+      },
+      {
         title: 'Utilities',
       },
     ],
