@@ -1,7 +1,11 @@
 import { tanstackConfig } from '@tanstack/eslint-config'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default [
+export default defineConfig([
   ...tanstackConfig,
+
+  globalIgnores(['.output/']),
+
   // ✅ JS config files: no TS project
   {
     files: ['*.config.js', '*.config.cjs', '*.config.mjs'],
@@ -26,4 +30,4 @@ export default [
       'sort-imports': 'off',
     },
   },
-]
+])
