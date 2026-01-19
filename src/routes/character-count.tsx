@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 
-import CopyButton from '@/components/copy-button'
 import { ExampleWrapper } from '@/components/example'
 import {
   Card,
@@ -12,28 +11,27 @@ import {
 } from '@/components/ui/card'
 import { Field, FieldGroup } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { toKebabCase } from '@/lib/utils'
 
-export const Route = createFileRoute('/kebab-case')({
+export const Route = createFileRoute('/character-count')({
   head: () => {
     return {
-      meta: [{ title: `Kebab case · Utilities` }],
+      meta: [{ title: `Character count · Utilities` }],
     }
   },
-  component: KebabCasePage,
+  component: CharacterCountPage,
 })
 
-function KebabCasePage() {
+function CharacterCountPage() {
   return (
     <ExampleWrapper>
-      <KebabCaseForm />
+      <CharacterCaseForm />
     </ExampleWrapper>
   )
 }
 
-function KebabCaseForm() {
+function CharacterCaseForm() {
   const [inputValue, setInputValue] = useState('')
-  const kebabString = toKebabCase(inputValue)
+  const characterLen = inputValue.length
 
   return (
     <Card className="col-span-2 mx-auto w-full max-w-2xl">
@@ -53,16 +51,12 @@ function KebabCaseForm() {
             />
           </Field>
 
-          {kebabString && (
-            <Field orientation="horizontal" className="items-start">
-              <div className="flex w-full items-center self-stretch rounded-xl bg-muted px-2.5 py-1">
-                <p className="font-mono text-sm font-medium text-foreground">
-                  {kebabString}
-                </p>
-              </div>
-              <CopyButton text={kebabString} />
-            </Field>
-          )}
+          <Field orientation="horizontal">
+            <p className="text-sm text-muted-foreground">Character count: </p>
+            <p className="text-sm font-medium text-foreground">
+              {characterLen}
+            </p>
+          </Field>
         </FieldGroup>
       </CardContent>
     </Card>

@@ -10,8 +10,9 @@ import {
 
 export default function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 flex items-center gap-2 bg-background p-4 text-white shadow-md">
+    <header className="sticky top-0 flex items-center gap-2 bg-background p-4 text-white shadow-md">
       <Button
+        nativeButton={false}
         variant="ghost"
         size="icon"
         className="size-8"
@@ -26,6 +27,11 @@ export default function Header() {
           <NavigationMenuItem>
             <NavigationMenuLink
               render={<Link to="/kebab-case">Kebab case</Link>}
+            />
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              render={<Link to="/character-count">Character count</Link>}
             />
           </NavigationMenuItem>
         </NavigationMenuList>
