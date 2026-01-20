@@ -20,10 +20,10 @@ export const Route = createFileRoute('/kebab-case')({
       meta: [{ title: `Kebab case · Utilities` }],
     }
   },
-  component: KebabCasePage,
+  component: RouteComponent,
 })
 
-function KebabCasePage() {
+function RouteComponent() {
   return (
     <ExampleWrapper>
       <KebabCaseForm />

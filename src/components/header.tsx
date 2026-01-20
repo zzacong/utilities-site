@@ -26,12 +26,23 @@ export default function Header() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink
-              render={<Link to="/kebab-case">Kebab case</Link>}
+              render={
+                <Link to="/kebab-case" activeProps={{ 'data-state': 'active' }}>
+                  Kebab case
+                </Link>
+              }
             />
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink
-              render={<Link to="/character-count">Character count</Link>}
+              render={
+                <Link
+                  to="/character-count"
+                  activeProps={{ 'data-state': 'active' }}
+                >
+                  Character count
+                </Link>
+              }
             />
           </NavigationMenuItem>
         </NavigationMenuList>

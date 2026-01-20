@@ -18,10 +18,10 @@ export const Route = createFileRoute('/character-count')({
       meta: [{ title: `Character count · Utilities` }],
     }
   },
-  component: CharacterCountPage,
+  component: RouteComponent,
 })
 
-function CharacterCountPage() {
+function RouteComponent() {
   return (
     <ExampleWrapper>
       <CharacterCaseForm />
