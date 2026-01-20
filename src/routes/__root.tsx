@@ -4,6 +4,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 
 import Header from '@/components/header'
 import NotFound from '@/components/not-found'
+import { ThemeProvider } from '@/components/theme-provider'
 
 import appCss from '../styles.css?url'
 
@@ -38,14 +39,17 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const theme = Route.useLoaderData()
   return (
-    <html lang="en">
+    <html lang="en" className={theme}>
       <head>
         <HeadContent />
       </head>
       <body>
-        <Header />
-        {children}
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
         <TanStackDevtools
           config={{
             position: 'bottom-right',

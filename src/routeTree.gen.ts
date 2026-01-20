@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as KebabCaseRouteImport } from './routes/kebab-case'
+import { Route as ExampleRouteImport } from './routes/example'
 import { Route as CharacterCountRouteImport } from './routes/character-count'
 import { Route as IndexRouteImport } from './routes/index'
 
 const KebabCaseRoute = KebabCaseRouteImport.update({
   id: '/kebab-case',
   path: '/kebab-case',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExampleRoute = ExampleRouteImport.update({
+  id: '/example',
+  path: '/example',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CharacterCountRoute = CharacterCountRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/character-count': typeof CharacterCountRoute
+  '/example': typeof ExampleRoute
   '/kebab-case': typeof KebabCaseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/character-count': typeof CharacterCountRoute
+  '/example': typeof ExampleRoute
   '/kebab-case': typeof KebabCaseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/character-count': typeof CharacterCountRoute
+  '/example': typeof ExampleRoute
   '/kebab-case': typeof KebabCaseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/character-count' | '/kebab-case'
+  fullPaths: '/' | '/character-count' | '/example' | '/kebab-case'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/character-count' | '/kebab-case'
-  id: '__root__' | '/' | '/character-count' | '/kebab-case'
+  to: '/' | '/character-count' | '/example' | '/kebab-case'
+  id: '__root__' | '/' | '/character-count' | '/example' | '/kebab-case'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CharacterCountRoute: typeof CharacterCountRoute
+  ExampleRoute: typeof ExampleRoute
   KebabCaseRoute: typeof KebabCaseRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/kebab-case'
       fullPath: '/kebab-case'
       preLoaderRoute: typeof KebabCaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/example': {
+      id: '/example'
+      path: '/example'
+      fullPath: '/example'
+      preLoaderRoute: typeof ExampleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/character-count': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CharacterCountRoute: CharacterCountRoute,
+  ExampleRoute: ExampleRoute,
   KebabCaseRoute: KebabCaseRoute,
 }
 export const routeTree = rootRouteImport

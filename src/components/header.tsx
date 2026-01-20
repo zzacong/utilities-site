@@ -1,5 +1,7 @@
 import { Link } from '@tanstack/react-router'
+import { Hammer } from 'lucide-react'
 
+import { ModeToggle } from '@/components/mode-toggle'
 import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
@@ -10,15 +12,14 @@ import {
 
 export default function Header() {
   return (
-    <header className="sticky top-0 flex items-center gap-2 bg-background p-4 text-white shadow-md">
+    <header className="sticky top-0 z-50 flex items-center gap-2 bg-background px-4 py-2 text-foreground shadow-md">
       <Button
         nativeButton={false}
         variant="ghost"
-        size="icon"
-        className="size-8"
+        size="icon-lg"
         render={
           <Link to="/">
-            <img src="/hammer.svg" alt="Utilities Logo" className="h-6 w-6" />
+            <Hammer />
           </Link>
         }
       />
@@ -47,6 +48,10 @@ export default function Header() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
+
+      <div className="flex flex-1 justify-end">
+        <ModeToggle />
+      </div>
     </header>
   )
 }
