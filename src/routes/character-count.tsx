@@ -36,8 +36,8 @@ function CharacterCaseForm() {
   return (
     <Card className="col-span-2 mx-auto w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>Kebab case converter</CardTitle>
-        <CardDescription>Convert any string into kebab-case</CardDescription>
+        <CardTitle>Character count</CardTitle>
+        <CardDescription>Count chracters length</CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup>
