@@ -1,19 +1,22 @@
 import { ExampleWrapper } from '@/components/example'
-import { Card } from '@/components/ui/card'
-
-import { CardDescription, CardHeader, CardTitle } from './ui/card'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle,
+} from '@/components/ui/empty'
 
 export default function NotFound() {
   return (
     <ExampleWrapper>
-      <Card className="col-span-2 mx-auto w-full max-w-2xl">
-        <CardHeader>
-          <CardTitle className="text-center text-5xl">404</CardTitle>
-          <CardDescription className="text-center text-xl">
-            Page not found
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <Empty className="col-span-2 mx-auto w-full max-w-2xl border border-dashed">
+        <EmptyHeader>
+          <EmptyTitle>404 - Not Found</EmptyTitle>
+          <EmptyDescription>
+            The page you're looking for doesn't exist.
+          </EmptyDescription>
+        </EmptyHeader>
+      </Empty>
     </ExampleWrapper>
   )
 }

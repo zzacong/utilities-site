@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 
 import { ComponentExample } from '@/components/component-example'
 
@@ -7,6 +7,9 @@ export const Route = createFileRoute('/example')({
     return {
       meta: [{ title: `Example component` }],
     }
+  },
+  loader: () => {
+    // throw notFound()
   },
   component: RouteComponent,
 })
