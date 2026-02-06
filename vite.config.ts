@@ -26,12 +26,12 @@ const config = defineConfig({
     viteReact(),
     VitePWA({
       registerType: 'autoUpdate',
-      devOptions: {
-        enabled: true,
-      },
+      injectRegister: false,
+
       manifest: {
         name: 'Utilities for devs',
         short_name: 'Util',
+        description: 'vite-pwa',
         start_url: '/kebab-case',
         display: 'standalone',
         background_color: '#ffffff',
@@ -48,6 +48,12 @@ const config = defineConfig({
             sizes: '512x512',
           },
         ],
+      },
+      devOptions: {
+        enabled: true,
+        // navigateFallback: 'index.html',
+        // suppressWarnings: true,
+        // type: 'module',
       },
     }),
   ],
