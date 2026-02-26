@@ -4,7 +4,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
   ...tanstackConfig,
 
-  globalIgnores(['.output/']),
+  globalIgnores(['.output/', 'dev-dist/']),
 
   // ✅ JS config files: no TS project
   {
