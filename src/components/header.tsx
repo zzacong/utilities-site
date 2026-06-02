@@ -46,6 +46,18 @@ export default function Header() {
               }
             />
           </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              render={
+                <Link
+                  to="/chinese-converter"
+                  activeProps={{ 'data-state': 'active' }}
+                >
+                  Chinese converter
+                </Link>
+              }
+            />
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
 
