@@ -1,11 +1,16 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { useDeferredValue, useMemo, useState } from 'react'
 import OpenCC from 'opencc-js'
 
 import CopyButton from '@/components/copy-button'
 import { ExampleWrapper } from '@/components/example'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Textarea } from '@/components/ui/textarea'
+
+const converters = {
+  simplified: OpenCC.Converter({ from: 'tw', to: 'cn' }),
+  traditional: OpenCC.Converter({ from: 'cn', to: 'tw' }),
+}
 
 export const Route = createFileRoute('/chinese-converter')({
   head: () => {
@@ -33,18 +38,24 @@ function RouteComponent() {
 
 function ChineseConverterForm() {
   const [inputText, setInputText] = useState('')
+  const deferredInput = useDeferredValue(inputText)
 
-  // Initialize converters
-  const s2tConverter = OpenCC.Converter({ from: 'cn', to: 'tw' })
-  const t2sConverter = OpenCC.Converter({ from: 'tw', to: 'cn' })
+  const convertedText = useMemo(() => {
+    if (!deferredInput) {
+      return {
+        simplified: '',
+        traditional: '',
+      }
+    }
 
-  // Derive both outputs from input
-  const simplifiedText = inputText ? t2sConverter(inputText) : ''
-  const traditionalText = inputText ? s2tConverter(inputText) : ''
+    return {
+      simplified: converters.simplified(deferredInput),
+      traditional: converters.traditional(deferredInput),
+    }
+  }, [deferredInput])
 
   return (
     <>
-      {/* Input Card - Full Width */}
       <Card className="col-span-2">
         <CardHeader>
           <CardTitle>输入 (Input)</CardTitle>
@@ -59,41 +70,39 @@ function ChineseConverterForm() {
         </CardContent>
       </Card>
 
-      {/* Simplified Output Card - Left */}
-      <Card className="col-span-1">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle>简体中文 (Simplified)</CardTitle>
-            {simplifiedText && <CopyButton text={simplifiedText} />}
-          </div>
-        </CardHeader>
-        <CardContent>
-          <Textarea
-            value={simplifiedText}
-            readOnly
-            className="min-h-[300px] bg-muted font-sans"
-          />
-        </CardContent>
-      </Card>
-
-      {/* Traditional Output Card - Right */}
-      <Card className="col-span-1">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle>繁體中文 (Traditional)</CardTitle>
-            {traditionalText && <CopyButton text={traditionalText} />}
-          </div>
-        </CardHeader>
-        <CardContent>
-          <Textarea
-            value={traditionalText}
-            readOnly
-            className="min-h-[300px] bg-muted font-sans"
-          />
-        </CardContent>
-      </Card>
+      <OutputCard
+        title="简体中文 (Simplified)"
+        text={convertedText.simplified}
+      />
+      <OutputCard
+        title="繁體中文 (Traditional)"
+        text={convertedText.traditional}
+      />
     </>
   )
 }
 
-// Made with Bob
+type OutputCardProps = {
+  title: string
+  text: string
+}
+
+function OutputCard({ title, text }: OutputCardProps) {
+  return (
+    <Card className="col-span-1">
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <CardTitle>{title}</CardTitle>
+          {text && <CopyButton text={text} />}
+        </div>
+      </CardHeader>
+      <CardContent>
+        <Textarea
+          value={text}
+          readOnly
+          className="min-h-[300px] bg-muted font-sans"
+        />
+      </CardContent>
+    </Card>
+  )
+}
