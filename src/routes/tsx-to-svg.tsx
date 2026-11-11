@@ -62,7 +62,7 @@ function TsxToSvgForm() {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             aria-invalid={error !== undefined}
-            className="min-h-[300px] font-mono"
+            className="min-h-[300px] font-mono text-xs md:text-xs"
           />
           {error && (
             <p role="alert" className="text-sm text-destructive">
