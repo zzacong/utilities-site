@@ -73,19 +73,36 @@ function SvgToTsxForm() {
       </Card>
 
       {jsx && (
-        <Card className="col-span-2">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle>JSX output</CardTitle>
-              <CopyButton text={jsx} />
-            </div>
-          </CardHeader>
-          <CardContent>
-            <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs">
-              {jsx}
-            </pre>
-          </CardContent>
-        </Card>
+        <>
+          <Card className="col-span-1">
+            <CardHeader>
+              <CardTitle>Preview</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex min-h-[200px] items-center justify-center rounded-lg border p-4">
+                <img
+                  alt="Pasted SVG preview"
+                  src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(deferredInput)}`}
+                  className="max-h-48 max-w-full"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="col-span-1">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle>JSX output</CardTitle>
+                <CopyButton text={jsx} />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <pre className="overflow-x-auto rounded-lg bg-muted p-3 font-mono text-xs">
+                {jsx}
+              </pre>
+            </CardContent>
+          </Card>
+        </>
       )}
     </>
   )
