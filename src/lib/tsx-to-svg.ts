@@ -146,10 +146,12 @@ export function convertTsxToSvg(source: string): ConvertResult {
   }
 }
 
+/** Babel's syntax errors carry a `loc`. Anything else is a converter bug and is rethrown. */
 function isParseError(error: unknown): error is ParseError {
   return error instanceof SyntaxError && 'loc' in error
 }
 
+/** True when the svg already declares its namespace, so no `xmlns` is added. */
 function hasXmlns(node: SvgNode): boolean {
   return node.attributes.some((attribute) => attribute.name === 'xmlns')
 }
@@ -232,11 +234,13 @@ function firstSvg(node: JsxRoot | undefined): JSXElement | undefined {
   return undefined
 }
 
+/** True for a JSX element named `svg`. */
 function isSvgElement(element: JSXElement): boolean {
   const { name } = element.openingElement
   return name.type === 'JSXIdentifier' && name.name === 'svg'
 }
 
+/** Type guard for the function forms the component search accepts. */
 function isFunctionNode(
   node: AstNode | null | undefined,
 ): node is FunctionNode {
@@ -247,10 +251,12 @@ function isFunctionNode(
   )
 }
 
+/** Type guard for JSX elements and fragments. */
 function isJsxRoot(node: AstNode | null | undefined): node is JsxRoot {
   return node?.type === 'JSXElement' || node?.type === 'JSXFragment'
 }
 
+/** Converts a JSX element into an SvgNode, rejecting React components. */
 function toSvgNode(element: JSXElement): SvgNode {
   const { name } = element.openingElement
   if (name.type !== 'JSXIdentifier') {
@@ -278,6 +284,7 @@ function attributesOf(element: JSXElement): SvgAttribute[] {
   })
 }
 
+/** Maps a React attribute name to its SVG name. */
 function svgAttributeName(attribute: JSXAttribute): string {
   if (attribute.name.type === 'JSXNamespacedName') {
     return `${attribute.name.namespace.name}:${attribute.name.name.name}`
@@ -334,6 +341,7 @@ function styleValue(style: ObjectExpression): string {
     .join('; ')
 }
 
+/** Reads a style object key written as an identifier or a string. */
 function styleKey(key: AstNode): string {
   if (key.type === 'Identifier') return key.name
   if (key.type === 'StringLiteral') return key.value
@@ -449,6 +457,7 @@ function printNode(node: SvgNode, indent: string): string {
   return `${open}\n${body.join('\n')}\n${indent}</${tag}>`
 }
 
+/** Escapes text for SVG markup. Attribute values also escape double quotes at the call site. */
 function escapeText(value: string): string {
   return value
     .replace(/&/g, '&amp;')
