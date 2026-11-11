@@ -8,6 +8,10 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 const config = defineConfig({
+  // allows the dev server to be reached over the tailnet (tailscale serve)
+  server: {
+    allowedHosts: ['.ts.net'],
+  },
   resolve: {
     // resolves `paths` from tsconfig.json natively (replaces vite-tsconfig-paths)
     tsconfigPaths: true,
