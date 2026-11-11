@@ -1,12 +1,4 @@
-import type { ClassValue } from 'clsx'
-
-import { clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
+/** Converts a string to kebab-case, collapsing spaces and underscores to dashes. */
 export function toKebabCase(input: string) {
   return (
     input

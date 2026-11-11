@@ -13,7 +13,7 @@ const config = {
     'prettier-plugin-tailwindcss',
   ],
   tailwindStylesheet: './src/styles.css',
-  tailwindFunctions: ['clsx', 'cva', 'cn', 'twMerge'],
+  tailwindFunctions: ['cva', 'cn'],
   importOrderParserPlugins: ['typescript', 'jsx'],
   importOrder: [
     '<TYPES>^(node:)',
