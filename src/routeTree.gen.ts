@@ -9,25 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as KebabCaseRouteImport } from './routes/kebab-case'
-import { Route as ExampleRouteImport } from './routes/example'
-import { Route as ChineseConverterRouteImport } from './routes/chinese-converter'
-import { Route as CharacterCountRouteImport } from './routes/character-count'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CharacterCountRouteImport } from './routes/character-count'
+import { Route as ChineseConverterRouteImport } from './routes/chinese-converter'
+import { Route as ExampleRouteImport } from './routes/example'
+import { Route as KebabCaseRouteImport } from './routes/kebab-case'
 
-const KebabCaseRoute = KebabCaseRouteImport.update({
-  id: '/kebab-case',
-  path: '/kebab-case',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExampleRoute = ExampleRouteImport.update({
-  id: '/example',
-  path: '/example',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChineseConverterRoute = ChineseConverterRouteImport.update({
-  id: '/chinese-converter',
-  path: '/chinese-converter',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CharacterCountRoute = CharacterCountRouteImport.update({
@@ -35,9 +25,19 @@ const CharacterCountRoute = CharacterCountRouteImport.update({
   path: '/character-count',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ChineseConverterRoute = ChineseConverterRouteImport.update({
+  id: '/chinese-converter',
+  path: '/chinese-converter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExampleRoute = ExampleRouteImport.update({
+  id: '/example',
+  path: '/example',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KebabCaseRoute = KebabCaseRouteImport.update({
+  id: '/kebab-case',
+  path: '/kebab-case',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -66,18 +66,10 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/character-count'
-    | '/chinese-converter'
-    | '/example'
-    | '/kebab-case'
+    '/' | '/character-count' | '/chinese-converter' | '/example' | '/kebab-case'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/character-count'
-    | '/chinese-converter'
-    | '/example'
-    | '/kebab-case'
+    '/' | '/character-count' | '/chinese-converter' | '/example' | '/kebab-case'
   id:
     | '__root__'
     | '/'
@@ -97,25 +89,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/kebab-case': {
-      id: '/kebab-case'
-      path: '/kebab-case'
-      fullPath: '/kebab-case'
-      preLoaderRoute: typeof KebabCaseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/example': {
-      id: '/example'
-      path: '/example'
-      fullPath: '/example'
-      preLoaderRoute: typeof ExampleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chinese-converter': {
-      id: '/chinese-converter'
-      path: '/chinese-converter'
-      fullPath: '/chinese-converter'
-      preLoaderRoute: typeof ChineseConverterRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/character-count': {
@@ -125,11 +103,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CharacterCountRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/chinese-converter': {
+      id: '/chinese-converter'
+      path: '/chinese-converter'
+      fullPath: '/chinese-converter'
+      preLoaderRoute: typeof ChineseConverterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/example': {
+      id: '/example'
+      path: '/example'
+      fullPath: '/example'
+      preLoaderRoute: typeof ExampleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kebab-case': {
+      id: '/kebab-case'
+      path: '/kebab-case'
+      fullPath: '/kebab-case'
+      preLoaderRoute: typeof KebabCaseRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
