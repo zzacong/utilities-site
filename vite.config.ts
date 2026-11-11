@@ -6,10 +6,11 @@ import viteReact from '@vitejs/plugin-react'
 import { nitro } from 'nitro/vite'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
-import viteTsConfigPaths from 'vite-tsconfig-paths'
 
 const config = defineConfig({
   resolve: {
+    // resolves `paths` from tsconfig.json natively (replaces vite-tsconfig-paths)
+    tsconfigPaths: true,
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
@@ -17,10 +18,6 @@ const config = defineConfig({
   plugins: [
     devtools(),
     nitro(),
-    // this is the plugin that enables path aliases
-    viteTsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
     tailwindcss(),
     tanstackStart(),
     viteReact(),
