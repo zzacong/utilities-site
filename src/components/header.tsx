@@ -67,6 +67,15 @@ export default function Header() {
               }
             />
           </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink
+              render={
+                <Link to="/svg-to-tsx" activeProps={{ 'data-state': 'active' }}>
+                  SVG to TSX
+                </Link>
+              }
+            />
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
 

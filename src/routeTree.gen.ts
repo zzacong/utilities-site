@@ -14,6 +14,7 @@ import { Route as CharacterCountRouteImport } from './routes/character-count'
 import { Route as ChineseConverterRouteImport } from './routes/chinese-converter'
 import { Route as ExampleRouteImport } from './routes/example'
 import { Route as KebabCaseRouteImport } from './routes/kebab-case'
+import { Route as SvgToTsxRouteImport } from './routes/svg-to-tsx'
 import { Route as TsxToSvgRouteImport } from './routes/tsx-to-svg'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const KebabCaseRoute = KebabCaseRouteImport.update({
   path: '/kebab-case',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SvgToTsxRoute = SvgToTsxRouteImport.update({
+  id: '/svg-to-tsx',
+  path: '/svg-to-tsx',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TsxToSvgRoute = TsxToSvgRouteImport.update({
   id: '/tsx-to-svg',
   path: '/tsx-to-svg',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/chinese-converter': typeof ChineseConverterRoute
   '/example': typeof ExampleRoute
   '/kebab-case': typeof KebabCaseRoute
+  '/svg-to-tsx': typeof SvgToTsxRoute
   '/tsx-to-svg': typeof TsxToSvgRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/chinese-converter': typeof ChineseConverterRoute
   '/example': typeof ExampleRoute
   '/kebab-case': typeof KebabCaseRoute
+  '/svg-to-tsx': typeof SvgToTsxRoute
   '/tsx-to-svg': typeof TsxToSvgRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/chinese-converter': typeof ChineseConverterRoute
   '/example': typeof ExampleRoute
   '/kebab-case': typeof KebabCaseRoute
+  '/svg-to-tsx': typeof SvgToTsxRoute
   '/tsx-to-svg': typeof TsxToSvgRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/chinese-converter'
     | '/example'
     | '/kebab-case'
+    | '/svg-to-tsx'
     | '/tsx-to-svg'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/chinese-converter'
     | '/example'
     | '/kebab-case'
+    | '/svg-to-tsx'
     | '/tsx-to-svg'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/chinese-converter'
     | '/example'
     | '/kebab-case'
+    | '/svg-to-tsx'
     | '/tsx-to-svg'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   ChineseConverterRoute: typeof ChineseConverterRoute
   ExampleRoute: typeof ExampleRoute
   KebabCaseRoute: typeof KebabCaseRoute
+  SvgToTsxRoute: typeof SvgToTsxRoute
   TsxToSvgRoute: typeof TsxToSvgRoute
 }
 
@@ -145,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KebabCaseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/svg-to-tsx': {
+      id: '/svg-to-tsx'
+      path: '/svg-to-tsx'
+      fullPath: '/svg-to-tsx'
+      preLoaderRoute: typeof SvgToTsxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tsx-to-svg': {
       id: '/tsx-to-svg'
       path: '/tsx-to-svg'
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChineseConverterRoute: ChineseConverterRoute,
   ExampleRoute: ExampleRoute,
   KebabCaseRoute: KebabCaseRoute,
+  SvgToTsxRoute: SvgToTsxRoute,
   TsxToSvgRoute: TsxToSvgRoute,
 }
 export const routeTree = rootRouteImport
